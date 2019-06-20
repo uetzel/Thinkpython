@@ -87,11 +87,13 @@ their greatest common divisor.
 """
 
 def gcd(a,b):
-    if b == 0:
+    if a%b == 0:
+        return (b)
+    elif b == 0:
         return a
     elif a%b != 0:
         return gcd(b, a%b)
 
     
     
-print (gcd(12,4))
+print (gcd(20,7))
