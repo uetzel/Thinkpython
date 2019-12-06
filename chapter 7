@@ -78,3 +78,40 @@ def eval_loop():
             print({}.format(user_input))
             
 eval_loop()
+
+"""
+Exercise 7.3. The mathematician Srinivasa Ramanujan found an infinite series that can be used to
+generate a numerical approximation of 1/π:
+
+See page p.70 
+
+Write a function called estimate_pi that uses this formula to compute and return an estimate of
+π. It should use a while loop to compute terms of the summation until the last term is smaller than
+1e-15 (which is Python notation for 10−15). You can check the result by comparing it to math.pi.
+"""
+import math
+
+def factorial(x):
+    if x == 0: 
+        return 1
+    else:
+        recurse = factorial(x-1)
+        result = recurse * x
+        return result
+
+def estimate_pi():
+    i = 0
+    FACTOR = 2 * math.sqrt(2) / 9801
+    while True: 
+        numerator = factorial(4 * i) * (1103 + 26390 * i)
+        denominator = (factorial(i)) ** 4 * 396 ** (4 * i) 
+        result = FACTOR * numerator / denominator
+        i += 1
+        
+        if abs(result)< 1e-15:
+            break
+        return 1 / result 
+        # The implemented Ramanujan Function leads to inverse pi, hence 1/result to get pi
+    
+print(estimate_pi())
+
