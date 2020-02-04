@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 2020 20:05
+
+@author: Usman Kotwal
+"""
+
+"""
+Exercise 11.5. Two words are “rotate pairs” if you can rotate one of them and 
+get the other (see rotate_word in Exercise 8.5).
+Write a program that reads a wordlist and finds all the rotate pairs. 
+Solution: http: //thinkpython2. com/ code/ rotate_ pairs. py
+
+
+Part 1: Rotate the word
+"""
+
+def word_into_list(word):
+    #create an empty list and fill it with the elements of the input string
+    word_list = []
+    for i in word:
+        word_list.append(i.lower())
+    return(word_list)
+
+        
+def letters_into_integers(word):
+    #turn the elements of the list into integers
+    word_list_letters = word_into_list(word)
+    word_list_integers = []
+    for i in word_list_letters: 
+        word_list_integers.append(ord(i))
+    return(word_list_integers)
+
+def integers_rotation(word, rotation):
+    #The letters have been turned to integers and those will be shifted
+    #by the number __rotation__
+    word_list_integers_rotated = []
+    word_list_integers = letters_into_integers(word)
+    for i in word_list_integers: 
+        if i + rotation < 97:
+            word_list_integers_rotated.append(i+rotation+26)
+            #I add 26 to account for the shift due to having 26 letters 
+            #in the alphabet
+        if i + rotation > 122:
+            word_list_integers_rotated.append(i+rotation-26)
+            #I subtract 26 to account for shift when reaching letters past z
+        else: 
+            word_list_integers_rotated.append(i+rotation)
+    return(word_list_integers_rotated)
+
+def letters_rotated(word, rotation): 
+    word_list_integers_rotated = integers_rotation(word, rotation)
+    word_list_letters_rotated = []
+    for i in word_list_integers_rotated: 
+        word_list_letters_rotated.append(chr(i))
+        #Turn the integers back to letters
+    return(word_list_letters_rotated)
+    
+def rotated_word(word, rotation):
+    word_list_letters_rotated = letters_rotated(word, rotation)
+    word_rotated = ""
+    for i in word_list_letters_rotated:
+        word_rotated += i
+        #Take all the rotated letters and add them back into a string
+    return word_rotated
