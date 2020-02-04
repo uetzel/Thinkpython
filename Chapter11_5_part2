@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb  4 20:27:24 2020
+
+@author: Usman Kottwal
+"""
+
+"""
+Exercise 11.5. Two words are “rotate pairs” if you can rotate one of them and 
+get the other (see rotate_word in Exercise 8.5).
+Write a program that reads a wordlist and finds all the rotate pairs. 
+Solution: http: //thinkpython2. com/ code/ rotate_ pairs. py
+
+
+Part 2: Rotate the word
+"""
+
+from Chapter11_5_part1 import rotated_word
+
+fin = open("words.txt")
+worddict = {}
+for line in fin: 
+    line = line.lower().strip()
+    worddict.setdefault(line)
+
+def check_rotated_word(rotation):
+    word_list_with_rotation_match = []
+    fin = open("words.txt")
+    for line in fin: 
+        line = line.lower().strip()
+        word_rotated = rotated_word(line, rotation)
+        if word_rotated in worddict:
+            word_list_with_rotation_match.append([line, word_rotated])
+    return(word_list_with_rotation_match)
+
+def check_all_rotated_words():
+    for i in range(1, 14):
+        print("all rotate words for rotation {} are in the following list are: \n {}"\
+              .format(i, check_rotated_word(i)) + "\n")
+
+check_all_rotated_words()
